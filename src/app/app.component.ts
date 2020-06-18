@@ -19,4 +19,13 @@ export class AppComponent {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
+
+  home() {
+    if (this.currentUser && this.currentUser.token) {
+      //w currentUser powinna znalesc sie rola i na jej podstawie przekierowac do doctor badz pateint dashboard.
+      this.router.navigate(['/doctordashboard']);
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
 }

@@ -5,4 +5,9 @@ export class User {
   firstname: string;
   lastname: string;
   token: string;
+
+  constructor(username: string, token: string) {
+    this.username = username;
+    this.token = token;
+  }
 }

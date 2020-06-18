@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../_services';
 import {AlertService} from '../_services/alert.service';
 import {first} from 'rxjs/operators';
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -55,15 +56,8 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        data => {
-          console.log(data.headers.get('Authorization'));
-          /*if (user && user.token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-          }*/
-
-          this.router.navigate([this.returnUrl]);
+        (data: HttpResponse<any>) => {
+          this.router.navigate(['/doctordashboard']);
         },
         error => {
           this.alertService.error(error);
