@@ -27,7 +27,7 @@ export class AuthenticationService {
       observe: 'response' as 'response'
     };
 
-    return this.http.post<any>(`http://localhost:8080/login`, { username, password }, httpOptions)
+    return this.http.post<any>(`http://localhost:8081/login`, { username, password }, httpOptions)
       .pipe(map(response => {
         const tokenHeader = response.headers.get('Authorization');
         const tokenString = tokenHeader.substr(7, tokenHeader.length);
@@ -35,12 +35,12 @@ export class AuthenticationService {
         const helper = new JwtHelperService();
         const decodedToken = helper.decodeToken(tokenString);
 
-        const user = new User('dawid111', tokenString);
+        const user = new User(decodedToken.sub, tokenString, decodedToken.role);
 
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
 
-        return response;
+        return user;
       }));
   }
 

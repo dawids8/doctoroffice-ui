@@ -56,8 +56,15 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        (data: HttpResponse<any>) => {
-          this.router.navigate(['/doctordashboard']);
+        (user) => {
+
+          if (user.role === 'DOCTOR') {
+            this.router.navigate(['/doctordashboard']);
+          } else if (user.role === 'PATIENT') {
+            this.router.navigate(['/patientdashboard']);
+          } else {
+            this.router.navigate(['/doctordashboard']);
+          }
         },
         error => {
           this.alertService.error(error);
