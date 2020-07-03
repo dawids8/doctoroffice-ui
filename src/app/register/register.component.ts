@@ -15,13 +15,8 @@ export class RegisterComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private authenticationService: AuthenticationService,
-    private userService: UserService,
-    private alertService: AlertService
-  ) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private authenticationService: AuthenticationService,
+              private userService: UserService, private alertService: AlertService) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -30,10 +25,18 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      pesel: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      dateOfBirth: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(9)]],
+      street: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      postCode: ['', [Validators.required]],
+      accountType: ['', [Validators.required]]
     });
   }
 
