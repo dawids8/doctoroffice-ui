@@ -22,8 +22,13 @@ export class AppComponent {
 
   home() {
     if (this.currentUser && this.currentUser.token) {
-      //w currentUser powinna znalesc sie rola i na jej podstawie przekierowac do doctor badz pateint dashboard.
-      this.router.navigate(['/doctordashboard']);
+      if (this.currentUser.role === 'PATIENT') {
+        this.router.navigate(['/patientdashboard']);
+      } else if (this.currentUser.role === 'DOCTOR') {
+        this.router.navigate(['/doctordashboard']);
+      } else {
+        this.router.navigate(['/']);
+      }
     } else {
       this.router.navigate(['/']);
     }

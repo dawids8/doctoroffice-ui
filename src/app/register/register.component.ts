@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
       street: ['', [Validators.required]],
       city: ['', [Validators.required]],
       postCode: ['', [Validators.required]],
-      accountType: ['', [Validators.required]]
+      userRole: ['Patient', [Validators.required]]
     });
   }
 
@@ -46,7 +46,6 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
     }
