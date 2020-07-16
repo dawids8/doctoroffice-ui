@@ -18,7 +18,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
 import { DoctorCalendarComponent } from './doctor-calendar/doctor-calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,9 @@ import { DoctorCalendarComponent } from './doctor-calendar/doctor-calendar.compo
     DoctorCalendarComponent,
   ],
   imports: [
+    CommonModule,
+    FormsModule,
+    FlatpickrModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -39,7 +48,9 @@ import { DoctorCalendarComponent } from './doctor-calendar/doctor-calendar.compo
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
