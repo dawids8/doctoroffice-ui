@@ -3,7 +3,8 @@ import {Doctor} from "./doctor";
 
 export class Appointment {
   id: number;
-  date: Date;
+  startDate: Date;
+  endDate: Date;
   diagnosis: string;
   prescription: string;
   doctor: Doctor;

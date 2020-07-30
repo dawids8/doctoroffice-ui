@@ -1,4 +1,4 @@
-import {Appointment} from "./appointments";
+import {Appointment} from "./appointment";
 
 export class Patient {
 

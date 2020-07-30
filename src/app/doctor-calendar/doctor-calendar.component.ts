@@ -51,15 +51,11 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
 
   currentUser: User;
   currentUserSubscription: Subscription;
-
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-
   view: CalendarView = CalendarView.Month;
-
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
-
+  activeDayIsOpen: boolean = true;
   modalData: {
     action: string;
     event: CalendarEvent;
@@ -85,49 +81,48 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ];
+  events: CalendarEvent[];
+  // = [
+  //   {
+  //     start: subDays(startOfDay(new Date()), 1),
+  //     end: addDays(new Date(), 1),
+  //     title: 'A 3 day event',
+  //     color: colors.red,
+  //     actions: this.actions,
+  //     allDay: true,
+  //     resizable: {
+  //       beforeStart: true,
+  //       afterEnd: true,
+  //     },
+  //     draggable: true,
+  //   },
+  //   {
+  //     start: startOfDay(new Date()),
+  //     title: 'An event with no end date',
+  //     color: colors.yellow,
+  //     actions: this.actions,
+  //   },
+  //   {
+  //     start: subDays(endOfMonth(new Date()), 3),
+  //     end: addDays(endOfMonth(new Date()), 3),
+  //     title: 'A long event that spans 2 months',
+  //     color: colors.blue,
+  //     allDay: true,
+  //   },
+  //   {
+  //     start: addHours(startOfDay(new Date()), 2),
+  //     end: addHours(new Date(), 2),
+  //     title: 'A draggable and resizable event',
+  //     color: colors.yellow,
+  //     actions: this.actions,
+  //     resizable: {
+  //       beforeStart: true,
+  //       afterEnd: true,
+  //     },
+  //     draggable: true,
+  //   },
+  // ];
 
-  activeDayIsOpen: boolean = true;
-  appointments: Appointment[];
 
 
   constructor(private modal: NgbModal, private authenticationService: AuthenticationService, private appointmentsService: AppointmentsService) {
@@ -142,9 +137,33 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
 
   loadAppointmentsByDoctorId(username: string): void {
     this.appointmentsService.getAllAppointmentsByDoctorUsername(username).subscribe(response => {
-        this.appointments = response;
-        console.log(this.appointments);
+        this.events = this.mapAppointmentsToCalendarEvents(response);
       });
+  }
+
+ //wywolanie metody konwertujacej talice appointments na tablice CalendarEvents
+  //console log wyniku
+  mapAppointmentsToCalendarEvents(appointments: Appointment[]): CalendarEvent[] {
+    let calendarEvents:CalendarEvent[] = new Array(appointments.length);
+
+    for (let i = 0; i < appointments.length; i++) {
+      console.log(appointments[i]);
+      calendarEvents[i] = this.mapAppointmentToCalendarEvent(appointments[i]);
+    }
+
+    return calendarEvents;
+  }
+
+  mapAppointmentToCalendarEvent(appointment: Appointment): CalendarEvent {
+    let calendarEvent:CalendarEvent = {
+        start: new Date(appointment.startDate),
+        end: new Date(appointment.endDate),
+        title: 'Wizyta',
+        color: colors.blue,
+        actions: this.actions,
+    };
+
+    return calendarEvent;
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
