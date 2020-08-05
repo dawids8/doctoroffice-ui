@@ -2,6 +2,7 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
   <div class="navbar-nav">
     <a class="nav-item nav-link" (click)="home()">Home</a>
+    <a class="nav-item nav-link" (click)="doctorScheduler()" *ngIf="currentUser.role=='DOCTOR'">Generate visits</a>
     <a class="nav-item nav-link" (click)="logout()">Logout</a>
   </div>
 </nav>
@@ -18,5 +19,5 @@
 <div class="text-center">
   <p>
     <span>Doctor Office app</span>
-  </p>
+  </p>s
 </div>

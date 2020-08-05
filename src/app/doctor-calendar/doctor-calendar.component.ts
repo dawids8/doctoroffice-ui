@@ -147,7 +147,6 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
     let calendarEvents:CalendarEvent[] = new Array(appointments.length);
 
     for (let i = 0; i < appointments.length; i++) {
-      console.log(appointments[i]);
       calendarEvents[i] = this.mapAppointmentToCalendarEvent(appointments[i]);
     }
 
@@ -161,8 +160,10 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
         title: 'Wizyta',
         color: colors.blue,
         actions: this.actions,
+        meta: appointment
     };
 
+    console.log(calendarEvent);
     return calendarEvent;
   }
 

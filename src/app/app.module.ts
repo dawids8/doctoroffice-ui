@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DoctorSchedulerComponent } from './doctor-scheduler/doctor-scheduler.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PatientDashboardComponent,
     AlertComponent,
     DoctorCalendarComponent,
+    DoctorSchedulerComponent,
   ],
   imports: [
     CommonModule,

@@ -33,4 +33,8 @@ export class AppComponent {
       this.router.navigate(['/']);
     }
   }
+
+  doctorScheduler() {
+    this.router.navigate(['/doctorscheduler']);
+  }
 }

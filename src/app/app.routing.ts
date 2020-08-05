@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {DoctorDashboardComponent} from './doctor-dashboard/doctor-dashboard.component';
 import {PatientDashboardComponent} from './patient-dashboard/patient-dashboard.component';
+import {DoctorSchedulerComponent} from './doctor-scheduler/doctor-scheduler.component';
 import {RegisterComponent} from './register/register.component';
 import {AuthGuard} from './_helpers/auth.guard';
 
@@ -11,7 +12,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'doctordashboard', component: DoctorDashboardComponent, canActivate: [AuthGuard] },
   { path: 'patientdashboard', component: PatientDashboardComponent, canActivate: [AuthGuard] },
-
+  { path: 'doctorscheduler', component: DoctorSchedulerComponent, canActivate: [AuthGuard] },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];
