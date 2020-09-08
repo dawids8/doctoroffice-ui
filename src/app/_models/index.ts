@@ -4,3 +4,4 @@ export * from './input-form-control';
 export * from './doctor';
 export * from './patient';
 export * from './appointment';
+export * from './schedule';
