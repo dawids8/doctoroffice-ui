@@ -141,8 +141,6 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
       });
   }
 
- //wywolanie metody konwertujacej talice appointments na tablice CalendarEvents
-  //console log wyniku
   mapAppointmentsToCalendarEvents(appointments: Appointment[]): CalendarEvent[] {
     let calendarEvents:CalendarEvent[] = new Array(appointments.length);
 
@@ -181,11 +179,7 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
     }
   }
 
-  eventTimesChanged({
-                      event,
-                      newStart,
-                      newEnd,
-                    }: CalendarEventTimesChangedEvent): void {
+  eventTimesChanged({event, newStart, newEnd,}: CalendarEventTimesChangedEvent): void {
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
