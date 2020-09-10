@@ -27,6 +27,9 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DoctorSchedulerComponent } from './doctor-scheduler/doctor-scheduler.component';
 
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +55,8 @@ import { DoctorSchedulerComponent } from './doctor-scheduler/doctor-scheduler.co
     MatFormFieldModule,
     MatInputModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
-    NgbModule
+    NgbModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
