@@ -1,34 +1,53 @@
-<form>
+  <!--  sekcja ustawien do generowania wizyt-->
+  <div class="container mx-auto mw-100">
+    <div class="row">
+      <div class="col border border-secondary ml-3" *ngFor="let schedule of schedules">
+        <div class="row justify-content-center pt-3">
+          <h4> {{schedule.weekDay}} </h4>
+        </div>
 
-  <div class="form-group row">
-    <div class="col-sm-1 col-form-label">
-      <label>Monday</label>
-    </div>
-    <div class="col-sm-1 col-form-label">
-      <label>Tuesday</label>
-    </div>
-    <div class="col-sm-1 col-form-label">
-      <label>Wednesday</label>
-    </div>
-    <div class="col-sm-1 col-form-label">
-      <label>Thursday</label>
-    </div>
-    <div class="col-sm-1 col-form-label">
-      <label>Friday</label>
-    </div>
-    <div class="col-sm-1 col-form-label">
-      <label>Saturday</label>
-    </div>
-    <div class="col-sm-1 col-form-label">
-      <label>Sunday</label>
-    </div>
-  </div>
+        <hr>
 
-  <div class="form-group row">
-      <div class="12hr-example" *ngFor="let x in 7">
-        <input [type]="x" placeholder="Time" aria-label="12hr format" [ngxTimepicker]="default" readonly>
-        <ngx-material-timepicker #default></ngx-material-timepicker>
+        <div class="row">
+          <label class="col pr-0">Start time:</label>
+          <input  class="col mr-2" [(ngModel)]="schedule.start" [ngModelOptions]="{standalone: true}" placeholder="Time" aria-label="12hr format" [ngxTimepicker]="default">
+          <ngx-material-timepicker #default></ngx-material-timepicker>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <label class="col pr-0"> End time: </label>
+          <input class="col mr-2" [(ngModel)]="schedule.finish" [ngModelOptions]="{standalone: true}" placeholder="Time" aria-label="12hr format" [ngxTimepicker]="default2">
+          <ngx-material-timepicker #default2></ngx-material-timepicker>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <label class="col pr-0"> Duration: </label>
+          <input class="col mr-2" [(ngModel)]="schedule.appointmentDuration" [ngModelOptions]="{standalone: true}" placeholder="Duration" aria-label="12hr format" >
+        </div>
+
+        <hr>
+
+        <div class="row pb-3">
+          <label class="col pr-0"> Interval: </label>
+          <input class="col mr-2" [(ngModel)]="schedule.intervalMinutes" [ngModelOptions]="{standalone: true}" placeholder="Interval" aria-label="12hr format">
+        </div>
       </div>
+    </div>
+
   </div>
 
-</form>
+  <hr>
+
+  <!--  //sekcja generowania wizyt-->
+  <div class="row">
+    <div class="col">
+      <span>Tekst</span>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" (click)="onClickSave()"> Zapisz </button>
+
