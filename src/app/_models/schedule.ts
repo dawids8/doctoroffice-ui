@@ -16,4 +16,5 @@ export class Schedule {
     this.intervalMinutes = intervalMinutes;
     this.weekDay = weekDay;
   }
+
 }
