@@ -40,4 +40,8 @@ export class DoctorSchedulerComponent implements OnInit {
       console.log(this.schedules);
     });
   }
+
+  onClickGenerateAppointments() {
+    console.log("generowanie wizyt...")
+  }
 }

@@ -10,16 +10,16 @@
 
         <div class="row">
           <label class="col pr-0">Start time:</label>
-          <input  class="col mr-2" [(ngModel)]="schedule.start" [ngModelOptions]="{standalone: true}" placeholder="Time" aria-label="12hr format" [ngxTimepicker]="default">
-          <ngx-material-timepicker #default></ngx-material-timepicker>
+          <input  class="col mr-2" [(ngModel)]="schedule.start" [ngModelOptions]="{standalone: true}" placeholder="Time" aria-label="24hr format" [format]="24" [ngxTimepicker]="startTimepicker">
+          <ngx-material-timepicker #startTimepicker></ngx-material-timepicker>
         </div>
 
         <hr>
 
         <div class="row">
           <label class="col pr-0"> End time: </label>
-          <input class="col mr-2" [(ngModel)]="schedule.finish" [ngModelOptions]="{standalone: true}" placeholder="Time" aria-label="12hr format" [ngxTimepicker]="default2">
-          <ngx-material-timepicker #default2></ngx-material-timepicker>
+          <input class="col mr-2" [(ngModel)]="schedule.finish" [ngModelOptions]="{standalone: true}" placeholder="Time" aria-label="24hr format" [format]="24" [ngxTimepicker]="finishTimepicker">
+          <ngx-material-timepicker #finishTimepicker></ngx-material-timepicker>
         </div>
 
         <hr>
@@ -42,12 +42,30 @@
 
   <hr>
 
-  <!--  //sekcja generowania wizyt-->
-  <div class="row">
-    <div class="col">
-      <span>Tekst</span>
-    </div>
-  </div>
-
   <button class="btn btn-primary" (click)="onClickSave()"> Zapisz </button>
 
+  <hr>
+
+  <!--  //sekcja generowania wizyt-->
+  <div class="row">
+    <h2>Generuj wizyty</h2>
+  </div>
+
+  <div class="row">
+    <div class="col pr-0">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date">
+          <input matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+
+    <hr>
+
+  </div>
+
+  <button class="btn btn-primary" (click)="onClickGenerateAppointments()"> Generuj </button>
