@@ -6,3 +6,4 @@ export * from './patient';
 export * from './appointment';
 export * from './schedule';
 export * from './schedule-day';
+export * from './generate-appointments-request';
