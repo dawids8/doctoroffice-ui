@@ -10,7 +10,8 @@
 
         <div class="row">
           <label class="col pr-0">Start time:</label>
-          <input  class="col mr-2" [(ngModel)]="schedule.start" [ngModelOptions]="{standalone: true}" placeholder="Time" aria-label="24hr format" [format]="24" [ngxTimepicker]="startTimepicker">
+          <input  class="col mr-2" [(ngModel)]="schedule.start" [ngModelOptions]="{standalone: true}" placeholder="Time"
+                  aria-label="24hr format" [format]="24" [ngxTimepicker]="startTimepicker">
           <ngx-material-timepicker #startTimepicker></ngx-material-timepicker>
         </div>
 
@@ -18,7 +19,8 @@
 
         <div class="row">
           <label class="col pr-0"> End time: </label>
-          <input class="col mr-2" [(ngModel)]="schedule.finish" [ngModelOptions]="{standalone: true}" placeholder="Time" aria-label="24hr format" [format]="24" [ngxTimepicker]="finishTimepicker">
+          <input class="col mr-2" [(ngModel)]="schedule.finish" [ngModelOptions]="{standalone: true}" placeholder="Time"
+                 aria-label="24hr format" [format]="24" [ngxTimepicker]="finishTimepicker">
           <ngx-material-timepicker #finishTimepicker></ngx-material-timepicker>
         </div>
 
@@ -26,14 +28,16 @@
 
         <div class="row">
           <label class="col pr-0"> Duration: </label>
-          <input class="col mr-2" [(ngModel)]="schedule.appointmentDuration" [ngModelOptions]="{standalone: true}" placeholder="Duration" aria-label="12hr format" >
+          <input class="col mr-2" [(ngModel)]="schedule.appointmentDuration" [ngModelOptions]="{standalone: true}"
+                 placeholder="Duration" aria-label="12hr format">
         </div>
 
         <hr>
 
         <div class="row pb-3">
           <label class="col pr-0"> Interval: </label>
-          <input class="col mr-2" [(ngModel)]="schedule.intervalMinutes" [ngModelOptions]="{standalone: true}" placeholder="Interval" aria-label="12hr format">
+          <input class="col mr-2" [(ngModel)]="schedule.intervalMinutes" [ngModelOptions]="{standalone: true}"
+                 placeholder="Interval" aria-label="12hr format">
         </div>
       </div>
     </div>
@@ -42,22 +46,22 @@
 
   <hr>
 
-  <button class="btn btn-primary" (click)="onClickSave()"> Zapisz </button>
+  <button class="btn btn-primary" (click)="onClickSave()"> Save </button>
 
   <hr>
 
   <!--  //sekcja generowania wizyt-->
   <div class="row">
-    <h2>Generuj wizyty</h2>
+    <h2>Generate appointments</h2>
   </div>
 
   <div class="row">
     <div class="col pr-0">
       <mat-form-field appearance="fill">
         <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate placeholder="Start date">
-          <input matEndDate placeholder="End date">
+        <mat-date-range-input [min]="currentDate" [rangePicker]="picker">
+          <input matStartDate placeholder="Start date" [(ngModel)]="generateStart" [ngModelOptions]="{standalone: true}">
+          <input matEndDate placeholder="End date" [(ngModel)]="generateEnd" [ngModelOptions]="{standalone: true}">
         </mat-date-range-input>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -65,7 +69,6 @@
     </div>
 
     <hr>
-
   </div>
 
-  <button class="btn btn-primary" (click)="onClickGenerateAppointments()"> Generuj </button>
+  <button class="btn btn-primary" (click)="onClickGenerateAppointments()"> Generate </button>
