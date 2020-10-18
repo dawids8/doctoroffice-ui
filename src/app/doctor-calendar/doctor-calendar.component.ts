@@ -132,10 +132,10 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadAppointmentsByDoctorId(this.currentUser.username);
+    this.loadAppointmentsByDoctorUsername(this.currentUser.username);
   }
 
-  loadAppointmentsByDoctorId(username: string): void {
+  loadAppointmentsByDoctorUsername(username: string): void {
     this.appointmentsService.getAllAppointmentsByDoctorUsername(username).subscribe(response => {
         this.events = this.mapAppointmentsToCalendarEvents(response);
       });
