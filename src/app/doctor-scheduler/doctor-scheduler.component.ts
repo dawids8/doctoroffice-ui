@@ -1,5 +1,5 @@
 import {AfterViewChecked, Component, ElementRef, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {ScheduleService} from "../_services/schedule.service.service";
+import {ScheduleService} from "../_services/schedule.service";
 import {GenerateAppointmentsRequest, Schedule, ScheduleDay, User} from "../_models";
 import {AuthenticationService} from "../_services";
 import {Subscription} from "rxjs";
@@ -35,7 +35,6 @@ export class DoctorSchedulerComponent implements OnInit {
   getSchedulesByDoctorId(username: string): void {
     this.scheduleService.getSchedulesByDoctorUsername(username).subscribe(response => {
       this.schedules = response;
-      // console.log(this.schedules);
     });
   }
 
@@ -43,7 +42,6 @@ export class DoctorSchedulerComponent implements OnInit {
     const updateScheduleRequest = new UpdateScheduleRequest(this.currentUser.username, this.schedules);
     this.scheduleService.updateSchedules(updateScheduleRequest).subscribe(response => {
       this.schedules = response;
-      // console.log(this.schedules);
     });
   }
 
