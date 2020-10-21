@@ -25,6 +25,7 @@ import {
 import {Appointment, User} from "../_models";
 import {AppointmentsService} from "../_services/appointments.service";
 import {AuthenticationService} from "../_services";
+import {AppointmentDetailsComponent} from "../appointment-details/appointment-details.component";
 
 const colors: any = {
   red: {
@@ -82,50 +83,8 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[];
-  // = [
-  //   {
-  //     start: subDays(startOfDay(new Date()), 1),
-  //     end: addDays(new Date(), 1),
-  //     title: 'A 3 day event',
-  //     color: colors.red,
-  //     actions: this.actions,
-  //     allDay: true,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-  //   },
-  //   {
-  //     start: startOfDay(new Date()),
-  //     title: 'An event with no end date',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //   },
-  //   {
-  //     start: subDays(endOfMonth(new Date()), 3),
-  //     end: addDays(endOfMonth(new Date()), 3),
-  //     title: 'A long event that spans 2 months',
-  //     color: colors.blue,
-  //     allDay: true,
-  //   },
-  //   {
-  //     start: addHours(startOfDay(new Date()), 2),
-  //     end: addHours(new Date(), 2),
-  //     title: 'A draggable and resizable event',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-  //   },
-  // ];
 
-
-
-  constructor(private modal: NgbModal, private authenticationService: AuthenticationService, private appointmentsService: AppointmentsService) {
+  constructor(private modalService: NgbModal, private authenticationService: AuthenticationService, private appointmentsService: AppointmentsService) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
     });
@@ -155,13 +114,12 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
     let calendarEvent:CalendarEvent = {
         start: new Date(appointment.startDate),
         end: new Date(appointment.endDate),
-        title: 'Wizyta',
+        title: 'Wizyta: ' + appointment.startDate,
         color: colors.blue,
         actions: this.actions,
         meta: appointment
     };
 
-    console.log(calendarEvent);
     return calendarEvent;
   }
 
@@ -195,7 +153,8 @@ export class DoctorCalendarComponent implements OnInit, OnDestroy {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    const modalRef = this.modalService.open(AppointmentDetailsComponent);
+    modalRef.componentInstance.appointment = event.meta;
   }
 
   setView(view: CalendarView) {
