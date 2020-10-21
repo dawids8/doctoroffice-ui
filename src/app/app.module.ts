@@ -28,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DoctorSchedulerComponent } from './doctor-scheduler/doctor-scheduler.component';
 
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { AppointmentDetailsComponent } from './appointment-details/appointment-details.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     AlertComponent,
     DoctorCalendarComponent,
     DoctorSchedulerComponent,
+    AppointmentDetailsComponent,
   ],
   imports: [
     CommonModule,
